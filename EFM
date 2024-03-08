@@ -1,0 +1,96 @@
+<form onsubmit="return validerFormulaire();">
+    <!-- Vos champs de formulaire ici -->
+    <input type="text" id="id" name="id"> 
+    <input type="text" id="nom" name="id"> 
+    <input type='button' value="lire">
+    <label>filiere </label>
+         <input type="RADIO" id="RADIO" name='x'>    <label>TDI </label>
+
+         <input type="RADIO" id="RADIO"  name='x'>    <label>TDM </label>
+
+         <input type="RADIO" id="RADIO"  name='x' >    <label>TRI </label>
+
+
+    <input type="text" id="note" name="note">
+    <input type="submit" value="AJOUTER">
+</form>
+
+function validerFormulaire() {
+    
+    var id = document.getElementById('id').value;
+    var nom = document.getElementById('nom').value;
+    var note = document.getElementById('note').value;
+
+    // Vérifier si les champs sont vides
+    if (id === '' || nom === '' || note === '') {
+        alert('Veuillez remplir tous les champs (id, nom, note).');
+        return false;
+    }
+
+     
+    return true;
+}
+
+////////////
+function ajouterLigne() {
+         
+        var id = "999";
+        var nom = "brahim abdelkader diaz";
+        var note = 0;  
+
+        var table = document.getElementById('listeNotes');
+        var ligne = table.insertRow(-1);
+
+        var celluleId = ligne.insertCell(0);
+        var celluleNom = ligne.insertCell(1);
+        var celluleNote = ligne.insertCell(2);
+
+        celluleId.innerHTML = id;
+        celluleNom.innerHTML = nom;
+
+         
+        if (note < 10) {
+            celluleNote.innerHTML = '<span class="rouge">' + note + '</span>';
+        } else {
+            celluleNote.innerHTML = '<span class="vert">' + note + '</span>';
+        }
+    }
+    
+    
+    //////////////
+        function lireDonnees() {
+
+         var idSaisi = document.getElementById('idInput').value;
+
+    
+        var stagiaire = rechercherStagiaireParId(idSaisi);
+
+         
+        if (stagiaire) {
+             
+            alert("ID: " + stagiaire.id + "\nNom: " + stagiaire.nom + "\nNote: " + stagiaire.note);
+        } else {
+             
+            alert("Stagiaire non trouvé pour l'ID saisi.");
+        }
+    }
+    
+    
+    //////////////
+     function confirmerSuppression(ligne) {
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette ligne ?");
+        if (confirmation) {
+            supprimerLigne(ligne);
+        }
+    }
+
+     function supprimerLigne(ligne) {
+        var table = document.getElementById('listeNotes');
+        table.deleteRow(ligne.rowIndex);
+    }
+    
+    
+    /////////////////////
+    function actualiserNoteMaximale() {
+        alert("Note maximale actualisée : " + noteMaximale);
+    }
